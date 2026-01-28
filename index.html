@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATELIER — Contemporary Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1512;
+            --secondary-dark: #2c2520;
+            --accent-warm: #d4a574;
+            --accent-cool: #8b9a8e;
+            --soft-white: #f9f7f4;
+            --text-muted: #6b6562;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--soft-white);
+            color: var(--primary-dark);
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            background: linear-gradient(to bottom, rgba(249, 247, 244, 0.98), rgba(249, 247, 244, 0));
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-warm);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--accent-warm);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 500px;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.9s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-dark);
+            color: var(--soft-white);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-warm);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-dark);
+            color: var(--soft-white);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 85vh;
+            background: linear-gradient(135deg, var(--accent-cool) 0%, var(--secondary-dark) 100%);
+            border-radius: 300px 0 0 300px;
+            opacity: 0;
+            animation: slideInRight 1.2s ease 0.5s both;
+            box-shadow: -40px 40px 80px rgba(26, 21, 18, 0.1);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-text {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12rem;
+            font-weight: 600;
+            color: rgba(212, 165, 116, 0.05);
+            z-index: 1;
+            top: 20%;
+            right: 10%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Featured Collections */
+        .collections {
+            padding: 8rem 4rem;
+            background: var(--primary-dark);
+            color: var(--soft-white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--accent-warm);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--secondary-dark);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(26, 21, 18, 0.9));
+            z-index: 2;
+            transition: opacity 0.4s ease;
+        }
+
+        .collection-card:hover::before {
+            opacity: 0.7;
+        }
+
+        .collection-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem;
+            z-index: 3;
+        }
+
+        .collection-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-info p {
+            font-size: 0.85rem;
+            color: var(--accent-warm);
+            letter-spacing: 0.05em;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 4rem;
+            background: var(--soft-white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-warm);
+            border: 1px solid var(--accent-warm);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--accent-warm);
+            color: var(--soft-white);
+            transform: rotate(360deg);
+        }
+
+        .feature-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+
+        .feature-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 6rem 4rem;
+            background: var(--accent-cool);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--soft-white);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .newsletter p {
+            color: var(--soft-white);
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(249, 247, 244, 0.3);
+            background: rgba(249, 247, 244, 0.1);
+            color: var(--soft-white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(249, 247, 244, 0.6);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(249, 247, 244, 0.2);
+            border-color: var(--accent-warm);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: var(--soft-white);
+            padding: 4rem 4rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--soft-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(249, 247, 244, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .hero {
+                padding: 0 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                height: auto;
+                padding: 8rem 2rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">ATELIER</a>
+        <ul class="nav-links">
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#new">New Arrivals</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-text">2026</div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Spring Collection</p>
+            <h1>Redefining Contemporary Elegance</h1>
+            <p class="hero-description">
+                Discover our carefully curated pieces that blend timeless sophistication with modern sensibility. 
+                Each garment tells a story of craftsmanship and conscious design.
+            </p>
+            <div class="cta-buttons">
+                <a href="#collections" class="btn btn-primary">Shop Collection</a>
+                <a href="#about" class="btn btn-secondary">Our Story</a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="collections">
+        <div class="section-header">
+            <h2>Featured Collections</h2>
+            <p>CURATED FOR THE MODERN WARDROBE</p>
+        </div>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <div class="collection-info">
+                    <h3>Essentials</h3>
+                    <p>Timeless pieces for everyday elegance</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-info">
+                    <h3>Evening</h3>
+                    <p>Refined sophistication for special moments</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <div class="collection-info">
+                    <h3>Resort</h3>
+                    <p>Effortless luxury for warm destinations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">✦</div>
+                <h4>Premium Quality</h4>
+                <p>Sourced from the finest materials and crafted with meticulous attention to detail</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">♺</div>
+                <h4>Sustainable</h4>
+                <p>Committed to ethical production and environmentally conscious practices</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">✈</div>
+                <h4>Worldwide Shipping</h4>
+                <p>Complimentary delivery on orders over $200 to destinations globally</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">◈</div>
+                <h4>Personal Service</h4>
+                <p>Expert styling advice and dedicated customer support at every step</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <h2>Join Our Community</h2>
+        <p>Subscribe for exclusive access to new collections, special offers, and style inspiration</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>ATELIER</h3>
+                <p>Contemporary fashion house dedicated to creating timeless pieces that celebrate individuality and conscious craftsmanship.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Atelier. All rights reserved. Designed with intention.</p>
+        </div>
+    </footer>
+</body>
+</html>
